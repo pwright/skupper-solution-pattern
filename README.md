@@ -1,3 +1,3 @@
-# Walkthrough Template
+# Solution Pattern for Skupper
 
-A template that can be used to bootstrap new walkthroughs. Walkthrough content goes under `/walkthroughs`.
+Based on https://skupper.io/start/index.html
