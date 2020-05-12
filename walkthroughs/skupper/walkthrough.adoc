@@ -1,4 +1,6 @@
-= Template Walkthrough
+:skupper_cli_release: 0.2.0
+
+= Communicating with another cluster using Skupper
 
 
 To show Skupper in action, we need an application to work with.  This
@@ -38,6 +40,15 @@ https://kubernetes.io/docs/tasks/tools/install-kubectl/[kubectl installation
 guide] for
 more information.
 
+
+[type=walkthroughResource]
+.Skupper
+****
+* https://github.com/skupperproject/skupper-example-hello-world[HTTP Hello World example code]
+* https://github.com/skupperproject/skupper-example-tcp-echo[TCP-based service example code]
+* link:https://skupper.io/examples/index.html[Explore the examples]
+****
+
 [type=walkthroughResource,serviceName=openshift]
 .Red Hat OpenShift
 ****
@@ -62,11 +73,11 @@ download it from GitHub and extract the executable using `tar` or
 
 Linux
 
- curl -fL https://github.com/skupperproject/skupper-cli/releases/download/{{skupper_cli_release}}/skupper-cli-{{skupper_cli_release}}-linux-amd64.tgz | tar -xzf -
+ curl -fL https://github.com/skupperproject/skupper-cli/releases/download/{skupper_cli_release}/skupper-cli-{skupper_cli_release}-linux-amd64.tgz | tar -xzf -
 
 macOS
 
- curl -fL https://github.com/skupperproject/skupper-cli/releases/download/{{skupper_cli_release}}/skupper-cli-{{skupper_cli_release}}-mac-amd64.tgz | tar -xzf -
+ curl -fL https://github.com/skupperproject/skupper-cli/releases/download/{skupper_cli_release}/skupper-cli-{skupper_cli_release}-mac-amd64.tgz | tar -xzf -
 
 This produces an executable file named `skupper` in your current
 directory.
@@ -90,8 +101,9 @@ To test your installation, run the `skupper --version` command.  You
 should see output like this:
 
  $ skupper --version
- skupper version {{skupper_cli_release}}
+ skupper version {skupper_cli_release}
 
+[time=5]
 == Step 2: Configure access to multiple namespaces
 
 Skupper is designed for use with multiple namespaces, typically on
@@ -169,6 +181,7 @@ Console for East
  $ skupper status
  skupper not enabled for east
 
+[time=5]
 == Step 3: Install the Skupper router in each namespace
 
 The `skupper init` command installs the Skupper router in the current
@@ -210,6 +223,7 @@ East
  $ skupper status
  Skupper enabled for namespace 'east'. It is not connected to any other sites.
 
+[time=5]
 == Step 4: Connect your namespaces
 
 After installation, you have the infrastructure you need, but your
@@ -265,6 +279,7 @@ East
  $ skupper status
  Skupper enabled for namespace 'east'. It is connected to 1 other site.
 
+[time=5]
 == Step 5: Expose your services
 
 You now have a Skupper network capable of multi-cluster communication,
@@ -364,37 +379,6 @@ See the https://github.com/skupperproject/skupper-example-hello-world/blob/maste
 example]
 for more detail.
 
-== The condensed version
-
-Skupper command installation
-
- curl -fL https://github.com/skupperproject/skupper-cli/releases/download/{{skupper_cli_release}}/skupper-cli-{{skupper_cli_release}}-linux-amd64.tgz | tar -xzf -
-
-West: Setup
-
- export KUBECONFIG=~/.kube/config-west
- <provider-login-command>
- kubectl create namespace west
- kubectl config set-context --current --namespace west
- skupper init
- skupper connection-token ~/secret.yaml
- kubectl create deployment hello-world-frontend --image quay.io/skupper/hello-world-frontend
- kubectl expose deployment hello-world-frontend --port 8080 --type LoadBalancer
-
-East: Setup
-
- export KUBECONFIG=~/.kube/config-east
- <provider-login-command>
- kubectl create namespace east
- kubectl config set-context --current --namespace east
- skupper init --edge
- skupper connect ~/secret.yaml
- kubectl create deployment hello-world-backend --image quay.io/skupper/hello-world-backend
- skupper expose deployment hello-world-backend --port 8080 --protocol http
-
-West: Testing
-
- curl $(kubectl get service hello-world-frontend -o jsonpath='http://{.status.loadBalancer.ingress[0].ip}:8080/')
 
 == Cleaning up
 
@@ -412,14 +396,6 @@ East
  skupper delete
  kubectl delete deployment/hello-world-backend
 
-== Next steps
-
-Now that you know how to connect services running on multiple
-clusters, here are a few more things to look at:
-
-* https://github.com/skupperproject/skupper-example-hello-world[Check out the HTTP Hello World example in more detail]
-* https://github.com/skupperproject/skupper-example-tcp-echo[See how you can connect any TCP-based service]
-* link:https://skupper.io/examples/index.html[Explore the examples]
 
 
 [type=verification]
