@@ -197,7 +197,7 @@ namespace.
  Skupper is now installed in namespace '{east-namespace}'.  Use 'skupper status' to get more information.
 ----
 
-Using the `--edge` argument in the {east-namespace} namespace disables network ingress at the
+NOTE: Using the `--edge` argument in the {east-namespace} namespace disables network ingress at the
 Skupper router layer. 
 
 
@@ -217,80 +217,56 @@ generated it.
 NOTE: Anyone who has the connection token can connect to your namespace.  Make sure that only those
 you trust have access to it.
 
-. Generate a
-token in the {west-namespace}
+. Generate a token in the *{west-namespace}*:
 +
  skupper connection-token $HOME/secret.yaml
 
-. Use the token in the {east-namespace} to form a connection
+. Use the token in the *{east-namespace}* to form a connection
 +
  skupper connect $HOME/secret.yaml
 
-
-=== Check the connection
-
-Use the `skupper status` command again to see if things have changed.
-If the connection is made, you should see the following output:
-
-West
-
- $ skupper status
- Skupper enabled for namespace 'west'. It is connected to 1 other site.
-
-East
-
- $ skupper status
- Skupper enabled for namespace 'east'. It is connected to 1 other site.
 
 [time=5]
 == Expose your services
 
 You now have a Skupper network capable of multi-cluster communication,
-but no services are attached to it.  This step uses the `skupper
+but no services are attached to it. 
+
+This task describes how to use  the `skupper
 expose` command to make a Kubernetes deployment on one namespace
 available on all the connected namespaces.
 
-In the examples below, we use the Hello World application to
-demonstrate service exposure.  The same steps apply for your own
-application.
 
 === Deploy the frontend and backend services
 
-Use `kubectl create deployment` to start the frontend in West.
+. Start the frontend in the {west-cluster}:
++
+ oc create deployment hello-world-frontend --image quay.io/skupper/hello-world-frontend
 
-West
-
- kubectl create deployment hello-world-frontend --image quay.io/skupper/hello-world-frontend
-
-Likewise, use `kubectl create deployment` to start the backend in
-East.
-
-East
-
- kubectl create deployment hello-world-backend --image quay.io/skupper/hello-world-backend
+. Start the backend in the {east-cluster}:
++
+ oc create deployment hello-world-backend --image quay.io/skupper/hello-world-backend
 
 === Expose the backend service
 
 At this point, we have the frontend and backend services running, but
 the frontend has no way to contact the backend.  The frontend and
-backend are in different namespaces (and perhaps different clusters),
+backend are in different namespaces and different clusters),
 and the backend has no public ingress.
 
-Use the `skupper expose` command in East to make `hello-world-backend`
-available in West.
+Use the `skupper expose` command in the {east-cluster} to make `hello-world-backend`
+available in the {west-cluster}.
 
-East
-
+. In the terminal for the {east-cluster}:
++
  skupper expose deployment hello-world-backend --port 8080 --protocol http
 
-=== Check the backend service
-
-Use `kubectl get services` in West to make sure the
-`hello-world-backend` service from East is represented.  You should
-see output like this (along with some other services):
-
-West
-
+. Check that the backend service is represented in the {west-cluster}:
++
+ oc get services
++
+The output should be similar to the following:
++
  $ kubectl get services
  NAME                   TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)       AGE
  hello-world-backend    ClusterIP      10.96.175.18    <none>          8080/TCP      1m30s
@@ -301,44 +277,22 @@ To test our Hello World, we need external access to the frontend (not
 the backend).  Use `kubectl expose` with `--type LoadBalancer` to make
 the frontend accessible using a conventional Kubernetes ingress.
 
-West
+. In the {west-cluster}, expose a route:
++
+ oc expose deployment hello-world-frontend --port 8080 --type LoadBalancer
 
- kubectl expose deployment hello-world-frontend --port 8080 --type LoadBalancer
+. Navigate to the link:{openshift-host}/console[OpenShift Console, window="_blank"]
 
-It takes a moment for the external IP to become available.  If you are
-using Minikube, link:minikube.html#prerequisites[you need to run `minikube
-tunnel`] for this to work.
+. Switch to the {west-namespace} project.
 
-Now use `curl` to see it in action.  The embedded `kubectl get`
-command below looks up the IP address for the frontend service and
-generates a URL for use with `curl`.
+. In the *Overview*, expand the *hello-world-frontend* application.
 
-West
+. Click *Create Route*. This creates a route and displays a URL.
 
- curl $(kubectl get service hello-world-frontend -o jsonpath='http://{.status.loadBalancer.ingress[0].ip}:8080/')
+. Click the resulting URL. 
++
+The output should be similar to the following:
++
+ I am the frontend.  The backend says 'Hello from hello-world-backend-6d58c544fc-dhzz2 (1)'.
 
-NOTE: If the embedded `kubectl get` command fails to get the IP,
-you can find it manually by running `kubectl get services` and looking
-up the external IP of the `hello-world-frontend` service.
-
-You should see output like this:
-
- I am the frontend.  The backend says 'Hello from hello-world-backend-869cd94f69-wh6zt (1)'.
-
-=== Summary
-
-Our simple HTTP application has two services.  We deployed each
-service to a different Kubernetes cluster.
-
-Ordinarily, a multi-cluster deployment of this sort means that the
-services have no way to communicate unless they are exposed to the
-public internet.
-
-By introducing Skupper into each namespace, we were able to create a
-virtual application network that connects the services across cluster
-boundaries.
-
-See the https://github.com/skupperproject/skupper-example-hello-world/blob/master/README.md#what-just-happened[Hello World
-example]
-for more detail.
 
