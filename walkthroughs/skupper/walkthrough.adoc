@@ -1,48 +1,37 @@
+:skupper-name: Skupper
 :skupper_cli_release: 0.2.0
+:west-cluster: Managed Integration
+:west-namespace: pass:q[*{walkthrough-namespace}*]
+:west-cli: oc
+:east-cluster: CodeReady Containers
+:east-namespace: pass:q[*crc*]
+:east-docs-link: https://code-ready.github.io/crc/
+:east-cli: oc
 
 = Communicating with another cluster using Skupper
 
+Securely enable communications across OpenShift clusters.
 
-To show Skupper in action, we need an application to work with.  This
-guide uses an HTTP Hello World application with a frontend service and
-a backend service.  The frontend uses the backend to process requests.
-In this scenario, the frontend is deployed in the `west`
-namespace, and the backend is deployed in the `east` namespace.
+
+This Solution Pattern uses an HTTP Hello World application with a frontend service and a backend service.  
+The frontend uses the backend to process requests.
+The frontend is deployed in the {west-namespace} namespace of the {west-cluster} cluster, and the backend is deployed in the {east-namespace} namespace of a {east-cluster} cluster.
 
 image::https://skupper.io/images/hello-world-entities.svg[]
 
-While these instructions use this particular application for
-demonstration purposes, the steps are the same for any Skupper
+While these instructions use this particular application for demonstration purposes, the steps are the same for any {skupper-name}
 deployment.
 
 .Prerequisites
 
-You must have access to at least another Kubernetes cluster.  
-In the steps below, replace `west` and `east` with your chosen cluster namespaces.
+You must have `oc` installed
 
-Each namespace can reside on *any cluster you choose*, and *you are
-not limited to two*.  You can have one on your laptop, another on
-Amazon, another on Google, and so on.  For convenience, you can have
-them all on one cluster.
+This Solution Pattern assumes you have link:{east-docs-link}[east-cluster] installed and running.  
 
-Skupper works with any flavor of Kubernetes.  Here are some of your
-options for setting up Kubernetes clusters:
-
-* link:minikube.html[Minikube]
-* https://aws.amazon.com/eks/getting-started/[Amazon Elastic Kubernetes Service]
-* https://docs.microsoft.com/en-us/azure/aks/intro-kubernetes[Azure Kubernetes Service]
-* https://cloud.google.com/kubernetes-engine/docs/quickstart[Google Kubernetes Engine]
-* https://www.openshift.com/learn/get-started/[Red Hat OpenShift] or https://www.okd.io/[OKD]
-* https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/[More providers]
-
-These instructions require `kubectl` version 1.15 or later.  See the
-https://kubernetes.io/docs/tasks/tools/install-kubectl/[kubectl installation
-guide] for
-more information.
-
+However, {skupper-name} works with any flavor of Kubernetes.  
 
 [type=walkthroughResource]
-.Skupper
+.{skupper-name}
 ****
 * https://github.com/skupperproject/skupper-example-hello-world[HTTP Hello World example code]
 * https://github.com/skupperproject/skupper-example-tcp-echo[TCP-based service example code]
@@ -56,18 +45,17 @@ more information.
 * link:https://help.openshift.com/[Openshift Online Help Center, window="_blank"]
 * link:https://blog.openshift.com/[Openshift Blog, window="_blank"]
 ****
+:sectnums:
 
 [time=5]
-== Step 1: Install the Skupper command-line tool in your environment
+== Install the {skupper-name} command-line tool in your environment
 
 The `skupper` command-line tool is the primary entrypoint for
-installing and configuring the Skupper infrastructure.  You need to
-install the `skupper` command only once for each development
-environment.
+installing and configuring the {skupper-name} infrastructure. 
 
 === Download and extract the command
 
-To get the latest release of the Skupper command for your platform,
+To get the latest release of the {skupper-name} command for your platform,
 download it from GitHub and extract the executable using `tar` or
 `unzip`.
 
@@ -82,7 +70,7 @@ macOS
 This produces an executable file named `skupper` in your current
 directory.
 
-See the https://github.com/skupperproject/skupper-cli/releases[Skupper CLI release
+See the https://github.com/skupperproject/skupper-cli/releases[{skupper-name} CLI release
 page] to get
 artifacts for other platforms.
 
@@ -104,165 +92,138 @@ should see output like this:
  skupper version {skupper_cli_release}
 
 [time=5]
-== Step 2: Configure access to multiple namespaces
+== Configure access to multiple namespaces
 
-Skupper is designed for use with multiple namespaces, typically on
+{skupper-name} is designed for use with multiple namespaces, typically on
 different clusters.  The `skupper` command uses your kubeconfig and
 current context to select the namespace where it operates.
 
-To avoid getting your wires crossed, you must use a distinct
-kubeconfig or context for each namespace.  The easiest way is to use
-separate console sessions.
+=== Configure separate terminal sessions
 
-=== Configure separate console sessions
-
-Start a console session for each of your namespaces.  Set the
+Start a terminal session for each of your namespaces.  Set the
 `KUBECONFIG` environment variable to a different path in each session.
 
-Console for West
+. Start a terminal for the {west-cluster}:
 
  export KUBECONFIG=$HOME/.kube/config-west
 
-Console for East
+. Start a terminal for the {east-cluster}
 
  export KUBECONFIG=$HOME/.kube/config-east
 
 === Log in to your clusters
 
-The methods for logging in vary by Kubernetes provider.  Find the
-instructions for your chosen provider or providers and use them to
-authenticate and establish access for each console session.
 
-Console for West
+. Log into the {west-cluster}.
 
- $ <login-command-for-your-provider>
+.. Navigate to the link:{openshift-host}/console[OpenShift Console, window="_blank"]
 
-Console for East
+.. Choose *Copy Login Command* from the menu displayed when you click on your username.
 
- $ <login-command-for-your-provider>
+.. Enter the command into the {west-cluster} terminal session.
 
-See the following links for more information:
+. Log into the {east-cluster}.
 
-* link:minikube.html#logging-in[Minikube]
-* https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html[Amazon Elastic Kubernetes Service]
-* https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough#connect-to-the-cluster[Azure Kubernetes Service]
-* https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl[Google Kubernetes Engine]
-* https://docs.openshift.com/container-platform/4.1/cli_reference/getting-started-cli.html#cli-logging-in_cli-developer-commands[Red Hat OpenShift] or https://docs.okd.io/latest/cli_reference/get_started_cli.html#basic-setup-and-login[OKD]
+.. Start {east-cluster}.
+
+ $ crc start
+
+.. Start the {east-cluster} using the command displayed in the output, for example:
+
+ $ oc login -u developer -p developer https://api.crc.testing:6443
+
 
 === Set the current namespaces
 
-Use `kubectl create namespace` to create the namespaces you wish to
-use.  Use `kubectl config set-context` to set the current namespace
-for each session.
+. In the terminal for the {west-cluster}:
++
+[subs="attributes+"]
+----
+{west-cli} config set-context --current --namespace {west-namespace}
+----
 
-Console for West
+. In the terminal for the {east-cluster}:
++
+[subs="attributes+"]
+----
+{east-cli} new-project {east-namespace}
+{east-cli} config set-context --current --namespace {east-namespace}
+----
 
- kubectl create namespace west
- kubectl config set-context --current --namespace west
-
-Console for East
-
- kubectl create namespace east
- kubectl config set-context --current --namespace east
-
-=== Check your configurations
+[type=verification]
+****
+Check your configurations
 
 Once you have logged in and set the current namespaces, use the
 `skupper status` command to check that each namespace is correctly
-configured.  You should see the following output:
+configured.
 
-Console for West
-
+. In the terminal for the {west-cluster}:
++
  $ skupper status
- skupper not enabled for west
+ skupper not enabled for {west-namespace}
 
-Console for East
-
+. In the terminal for the {east-cluster}:
++
  $ skupper status
- skupper not enabled for east
+ skupper not enabled for {east-namespace}
+
+****
+
 
 [time=5]
-== Step 3: Install the Skupper router in each namespace
+== Install the {skupper-name} router in each namespace
 
-The `skupper init` command installs the Skupper router in the current
+The `skupper init` command installs the {skupper-name} router in the current
 namespace.
 
-=== Install the router
+=== Install the router in both namespaces
 
-Run the `skupper init` command in the West namespace.
-
-West
-
+. In the terminal for the {west-cluster}:
++
+[subs="attributes+"]
+----
  $ skupper init
- Skupper is now installed in namespace 'west'.  Use 'skupper status' to get more information.
+ {skupper-name} is now installed in namespace '{west-namespace}'.  Use 'skupper status' to get more information.
+----
 
-Now run the `skupper init` command in the East namespace.
-
-East
-
+. In the terminal for the {east-cluster}:
++
+[subs="attributes+"]
+----
  $ skupper init --edge
- Skupper is now installed in namespace 'east'.  Use 'skupper status' to get more information.
+ {skupper-name} is now installed in namespace '{east-namespace}'.  Use 'skupper status' to get more information.
+----
 
-Using the `--edge` argument in East disables network ingress at the
-Skupper router layer.  In our scenario, East needs to establish one
-outbound connection to West.  It does not need to accept any incoming
-connections.  As a result, no network ingress is required in East.
+Using the `--edge` argument in the {east-namespace} namespace disables network ingress at the
+{skupper-name} router layer. 
 
-=== Check the installation
-
-To check the status of each namespace, use the `skupper status`
-command.
-
-West
-
- $ skupper status
- Skupper enabled for namespace 'west'. It is not connected to any other sites.
-
-East
-
- $ skupper status
- Skupper enabled for namespace 'east'. It is not connected to any other sites.
 
 [time=5]
-== Step 4: Connect your namespaces
+== Connect your namespaces
 
-After installation, you have the infrastructure you need, but your
-namespaces are not connected.  Creating a connection requires use of
-two `skupper` commands in conjunction, `skupper connection-token` and
-`skupper connect`.
+Connecting namespaces requires you use the following commands:
 
-The `skupper connection-token` command generates a secret token that
+* The `skupper connection-token` command generates a secret token that
 signifies permission to connect.  The token also carries the
-connection details.  The `skupper connect` command then uses the
+connection details.  
+
+* The `skupper connect` command then uses the
 connection token to establish a connection to the namespace that
 generated it.
 
-NOTE: The connection token is truly a _secret_.  Anyone who has
-the token can connect to your namespace.  Make sure that only those
+NOTE: Anyone who has the connection token can connect to your namespace.  Make sure that only those
 you trust have access to it.
 
-=== Generate a connection token
-
-In West, use the `skupper connection-token` command to generate a
-token.
-
-West
-
+. Generate a
+token in the {west-namespace}
++
  skupper connection-token $HOME/secret.yaml
 
-=== Use the token to form a connection
-
-With the token in hand, you are ready to connect.  Pass the token from
-West to the `skupper connect` command in East.
-
-East
-
+. Use the token in the {east-namespace} to form a connection
++
  skupper connect $HOME/secret.yaml
 
-If your console sessions are on different machines, you might need to
-use `scp` or a similar tool to transfer the token.  If you are using
-Minikube, link:minikube.html#prerequisites[you need to run `minikube
-tunnel`] for this to work.
 
 === Check the connection
 
@@ -272,17 +233,17 @@ If the connection is made, you should see the following output:
 West
 
  $ skupper status
- Skupper enabled for namespace 'west'. It is connected to 1 other site.
+ {skupper-name} enabled for namespace 'west'. It is connected to 1 other site.
 
 East
 
  $ skupper status
- Skupper enabled for namespace 'east'. It is connected to 1 other site.
+ {skupper-name} enabled for namespace 'east'. It is connected to 1 other site.
 
 [time=5]
-== Step 5: Expose your services
+== Expose your services
 
-You now have a Skupper network capable of multi-cluster communication,
+You now have a {skupper-name} network capable of multi-cluster communication,
 but no services are attached to it.  This step uses the `skupper
 expose` command to make a Kubernetes deployment on one namespace
 available on all the connected namespaces.
@@ -371,7 +332,7 @@ Ordinarily, a multi-cluster deployment of this sort means that the
 services have no way to communicate unless they are exposed to the
 public internet.
 
-By introducing Skupper into each namespace, we were able to create a
+By introducing {skupper-name} into each namespace, we were able to create a
 virtual application network that connects the services across cluster
 boundaries.
 
@@ -382,7 +343,7 @@ for more detail.
 
 == Cleaning up
 
-To remove Skupper and the other resources from this exercise, use
+To remove {skupper-name} and the other resources from this exercise, use
 the following commands:
 
 West
