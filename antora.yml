@@ -1,0 +1,6 @@
+name: mindmaps
+title: Mindmaps
+version: 'master'
+start_ROOT: ROOT:index.adoc
+nav:
+- modules/ROOT/nav.adoc

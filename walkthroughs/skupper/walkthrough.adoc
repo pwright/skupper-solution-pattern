@@ -4,7 +4,7 @@
 :west-namespace: {project-namespace}
 :west-cli: oc
 :east-cluster: CodeReady Containers
-:east-namespace: pass:q[*crc*]
+:east-namespace: crc
 :east-docs-link: https://code-ready.github.io/crc/
 :east-cli: oc
 
@@ -57,7 +57,7 @@ installing and configuring the Skupper infrastructure.
 For Linux or WSL on Windows, enter:
 +
  curl -fL https://github.com/skupperproject/skupper-cli/releases/download/{skupper_cli_release}/skupper-cli-{skupper_cli_release}-linux-amd64.tgz | tar -xzf -
-
++
 For macOS, enter:
 +
  curl -fL https://github.com/skupperproject/skupper-cli/releases/download/{skupper_cli_release}/skupper-cli-{skupper_cli_release}-mac-amd64.tgz | tar -xzf -
@@ -90,6 +90,7 @@ Do you see the following output:
 ----
 skupper version {skupper_cli_release}
 ----
+****
 
 [type=verificationFail]
 Try the steps again. If it's still not working contact your administrator, or seek help at https://skupper.io
@@ -107,46 +108,46 @@ current context to select the namespace where it operates.
 Start a terminal session for each of your namespaces.  Set the
 `KUBECONFIG` environment variable to a different path in each session.
 
-. Start a terminal for the {west-cluster}:
+. Start a terminal for the *{west-cluster}* cluster:
 
  export KUBECONFIG=$HOME/.kube/config-west
 
-. Start a terminal for the {east-cluster}
+. Start a terminal for the *{east-cluster}* cluster:
 
  export KUBECONFIG=$HOME/.kube/config-east
 
 === Log in to your clusters
 
 
-. Log into the {west-cluster}.
+. Log into the *{west-cluster}* cluster.
 
 .. Navigate to the link:{openshift-host}/console[OpenShift Console, window="_blank"]
 
 .. Choose *Copy Login Command* from the menu displayed when you click on your username.
 
-.. Enter the command into the {west-cluster} terminal session.
+.. Enter the command into the *{west-cluster}* terminal session.
 
-. Log into the {east-cluster}.
+. Log into the *{east-cluster}* cluster.
 
-.. Start {east-cluster}.
+.. Start {east-cluster}:
 
  $ crc start
 
-.. Start the {east-cluster} using the command displayed in the output, for example:
+.. Log into the {east-cluster} cluster using the command displayed in the output, for example:
 
  $ oc login -u developer -p developer https://api.crc.testing:6443
 
 
 === Set the current namespaces
 
-. In the terminal for the {west-cluster}:
+. In the terminal for the *{west-cluster}* cluster:
 +
 [subs="attributes+"]
 ----
 {west-cli} config set-context --current --namespace {west-namespace}
 ----
 
-. In the terminal for the {east-cluster}:
+. In the terminal for the *{east-cluster}* cluster:
 +
 [subs="attributes+"]
 ----
@@ -162,12 +163,12 @@ Once you have logged in and set the current namespaces, use the
 `skupper status` command to check that each namespace is correctly
 configured.
 
-. In the terminal for the {west-cluster}:
+. In the terminal for the *{west-cluster}* cluster:
 +
  $ skupper status
  skupper not enabled for {west-namespace}
 
-. In the terminal for the {east-cluster}:
+. In the terminal for the *{east-cluster}* cluster:
 +
  $ skupper status
  skupper not enabled for {east-namespace}
@@ -179,10 +180,21 @@ Try the steps again. If it's still not working contact your administrator, or se
 
 
 [time=5]
-== Install the Skupper router in each namespace
+== Install the Skupper router and connect the namespaces
 
-The `skupper init` command installs the Skupper router in the current
-namespace.
+Connecting namespaces requires you use the following commands:
+
+* The `skupper connection-token` command generates a secret token that
+signifies permission to connect.  The token also carries the
+connection details.  
+
+* The `skupper connect` command then uses the
+connection token to establish a connection to the namespace that
+generated it.
+
+NOTE: Anyone who has the connection token can connect to your namespace.  Make sure that only those
+you trust have access to it.
+
 
 === Install the router in both namespaces
 
@@ -206,21 +218,8 @@ NOTE: Using the `--edge` argument in the {east-namespace} namespace disables net
 Skupper router layer. 
 
 
-[time=5]
-== Connect your namespaces
+=== Connect your namespaces
 
-Connecting namespaces requires you use the following commands:
-
-* The `skupper connection-token` command generates a secret token that
-signifies permission to connect.  The token also carries the
-connection details.  
-
-* The `skupper connect` command then uses the
-connection token to establish a connection to the namespace that
-generated it.
-
-NOTE: Anyone who has the connection token can connect to your namespace.  Make sure that only those
-you trust have access to it.
 
 . Generate a token in the *{west-namespace}*:
 +
@@ -230,9 +229,32 @@ you trust have access to it.
 +
  skupper connect $HOME/secret.yaml
 
+[type=verification]
+****
+Do the following commands display the expected output?
+
+Use the
+`skupper status` command to check that each namespace is correctly
+configured.
+
+. In the terminal for the *{west-cluster}* cluster:
++
+ $ skupper status
+ skupper enabled for {west-namespace}.  It is connected to 1 other site.
+
+. In the terminal for the *{east-cluster}* cluster:
++
+ $ skupper status
+ skupper enabled for {east-namespace}. It is connected to 1 other site.
+
+****
+
+[type=verificationFail]
+Try the steps again. If it's still not working contact your administrator, or seek help at https://skupper.io
+
 
 [time=5]
-== Expose your services
+== Exposing the services
 
 You now have a Skupper network capable of multi-cluster communication,
 but no services are attached to it. 
@@ -276,11 +298,8 @@ The output should be similar to the following:
  NAME                   TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)       AGE
  hello-world-backend    ClusterIP      10.96.175.18    <none>          8080/TCP      1m30s
 
-=== Test your application
 
-To test our Hello World, we need external access to the frontend (not
-the backend).  Use `kubectl expose` with `--type LoadBalancer` to make
-the frontend accessible using a conventional Kubernetes ingress.
+=== Create a route
 
 . In the {west-cluster}, expose a route:
 +
@@ -294,10 +313,17 @@ the frontend accessible using a conventional Kubernetes ingress.
 
 . Click *Create Route*. This creates a route and displays a URL.
 
-. Click the resulting URL. 
-+
-The output should be similar to the following:
-+
+
+[type=verification]
+****
+
+Click the newly created URL. 
+
+Is the output  similar to the following:
+
  I am the frontend.  The backend says 'Hello from hello-world-backend-6d58c544fc-dhzz2 (1)'.
 
+****
 
+[type=verificationFail]
+Try the steps again. If it's still not working contact your administrator, or seek help at https://skupper.io
