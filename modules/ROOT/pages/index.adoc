@@ -1,1 +1,3 @@
-= Walkthrough source
+include::_partials/attributes.adoc[]
+
+include::_partials/walkthrough.adoc[]
