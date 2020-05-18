@@ -1,18 +1,34 @@
+:skupper-name: Skupper
+:skupper_cli_release: 0.2.0
+
+
+
+:west-cluster: Managed Integration
+:west-namespace: {project-namespace}
+:west-cli: oc
+:skupper-west: skupper 1
+
+
+:east-cluster: CodeReady Containers
+:east-namespace: crc
+:east-docs-link: https://code-ready.github.io/crc/
+:east-cli: oc
+:skupper-east: skupper 2
+
 
 = Communicating with another cluster using Skupper
 
 Securely enable communications across OpenShift clusters.
 
 
-This Solution Pattern uses an HTTP Hello World application with a frontend service and a backend service.  
+This Solution Pattern uses an HTTP Hello World application with a frontend service and a backend service.
 The frontend uses the backend to process requests.
 The frontend is deployed in the *{west-namespace}* namespace of the {west-cluster} cluster, and the backend is deployed in the *{east-namespace}* namespace of a {east-cluster} cluster.
 
 :overview-uml: overview
 
-[plantuml, Overview, svg,subs="attributes+"]
+image::Overview.svg[]
 ....
-include::{overview-uml}.uml[]
 ....
 
 While these instructions use this particular application for demonstration purposes, the steps are the same for any Skupper
@@ -22,7 +38,7 @@ deployment.
 
 * You must have `oc` installed
 
-* This Solution Pattern assumes you have link:{east-docs-link}[{east-cluster}] installed on your local machine, however, Skupper works with any flavor of Kubernetes.  
+* This Solution Pattern assumes you have link:{east-docs-link}[{east-cluster}] installed on your local machine, however, Skupper works with any flavor of Kubernetes.
 
 [type=walkthroughResource]
 .Skupper
@@ -46,7 +62,7 @@ deployment.
 == Installing the Skupper cli in your local environment
 
 The `skupper` command-line tool is the primary entrypoint for
-installing and configuring the Skupper infrastructure. 
+installing and configuring the Skupper infrastructure.
 
 . Download the latest release of the Skupper command for your platform,
 +
@@ -201,7 +217,7 @@ Connecting namespaces requires you use the following commands:
 
 * The `skupper connection-token` command generates a secret token that
 signifies permission to connect.  The token also carries the
-connection details.  
+connection details.
 
 * The `skupper connect` command then uses the
 connection token to establish a connection to the namespace that
@@ -240,7 +256,7 @@ The following output is displayed:
 ----
 
 NOTE: Using the `--edge` argument in the {east-namespace} namespace disables network ingress at the
-Skupper router layer. 
+Skupper router layer.
 
 
 === Connect your namespaces
@@ -298,7 +314,7 @@ Try the steps again. If it's still not working contact your administrator, or se
 == Exposing the services
 
 You now have a Skupper network capable of multi-cluster communication,
-but no services are attached to it. 
+but no services are attached to it.
 
 This task describes how to use  the `skupper
 expose` command to make a Kubernetes deployment on one namespace
@@ -358,7 +374,7 @@ The output should be similar to the following:
 [type=verification]
 ****
 
-Click the newly created URL. 
+Click the newly created URL.
 
 Is the output  similar to the following:
 
