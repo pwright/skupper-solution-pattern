@@ -52,46 +52,51 @@ deployment.
 The `skupper` command-line tool is the primary entrypoint for
 installing and configuring the Skupper infrastructure. 
 
-=== Download and extract the command
-
-To get the latest release of the Skupper command for your platform,
-download it from GitHub and extract the executable using `tar` or
-`unzip`.
-
-Linux
-
+. Download the latest release of the Skupper command for your platform,
++
+For Linux or WSL on Windows, enter:
++
  curl -fL https://github.com/skupperproject/skupper-cli/releases/download/{skupper_cli_release}/skupper-cli-{skupper_cli_release}-linux-amd64.tgz | tar -xzf -
 
-macOS
-
+For macOS, enter:
++
  curl -fL https://github.com/skupperproject/skupper-cli/releases/download/{skupper_cli_release}/skupper-cli-{skupper_cli_release}-mac-amd64.tgz | tar -xzf -
-
++
 This produces an executable file named `skupper` in your current
 directory.
++
+NOTE: See the https://github.com/skupperproject/skupper-cli/releases[Skupper CLI release
+page] for information on other platforms.
 
-See the https://github.com/skupperproject/skupper-cli/releases[Skupper CLI release
-page] to get
-artifacts for other platforms.
-
-=== Place the command on your path
-
-The subsequent steps assume `skupper` is on your path.  As an example,
-this is how you might install it in your home directory:
-
+. Add `skupper` to your path
++
+For example:
++
  mkdir -p $HOME/bin
  export PATH=$PATH:$HOME/bin
  mv skupper $HOME/bin
 
-=== Check the command
+[type=verification]
+****
+To test your installation:
 
-To test your installation, run the `skupper --version` command.  You
-should see output like this:
+----
+$ skupper --version
+----
 
- $ skupper --version
- skupper version {skupper_cli_release}
+Do you see the following output:
+
+[subs="attributes+"]
+----
+skupper version {skupper_cli_release}
+----
+
+[type=verificationFail]
+Try the steps again. If it's still not working contact your administrator, or seek help at https://skupper.io
+
 
 [time=5]
-== Configure access to multiple namespaces
+== Configuring access to multiple namespaces
 
 Skupper is designed for use with multiple namespaces, typically on
 different clusters.  The `skupper` command uses your kubeconfig and
@@ -170,7 +175,7 @@ configured.
 ****
 
 [type=verificationFail]
-Try the steps again. If it's still not working contact your administrator.
+Try the steps again. If it's still not working contact your administrator, or seek help at https://skupper.io
 
 
 [time=5]

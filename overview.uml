@@ -1,0 +1,39 @@
+
+@startuml
+left to right direction
+skinparam monochrome true
+skinparam ranksep 20
+skinparam dpi 150
+skinparam arrowThickness 0.7
+skinparam packageTitleAlignment left
+skinparam usecaseBorderThickness 0.4
+skinparam defaultFontSize 12
+skinparam rectangleBorderThickness 1
+
+skinparam rectangle {
+  BorderStyle<<namespace>> dotted
+  roundCorner<<namespace>> 25
+}
+
+rectangle "{west-cluster}" {
+  rectangle "{west-namespace}" <<namespace>>  { 
+
+  (Frontend service)
+  ({skupper-west})
+    }
+}
+rectangle "{east-cluster}" {
+  rectangle "{east-namespace}" <<namespace>>{
+  
+  (Backend service)
+  ({skupper-east})
+    }
+}
+
+' links
+(Frontend service) - ({skupper-west})
+({skupper-west}) -- ({skupper-east})
+(Backend service) - ({skupper-east})
+
+@enduml
+
