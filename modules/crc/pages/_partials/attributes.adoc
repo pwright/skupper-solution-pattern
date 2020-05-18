@@ -3,14 +3,14 @@
 
 
 
-:west-cluster: West
-:west-namespace: west
-:west-cli: kubectl
+:west-cluster: Managed Integration
+:west-namespace: {project-namespace}
+:west-cli: oc
 :skupper-west: skupper 1
 
 
-:east-cluster: East
-:east-namespace: east
+:east-cluster: CodeReady Containers
+:east-namespace: crc
 :east-docs-link: https://code-ready.github.io/crc/
-:east-cli: kubectl
+:east-cli: oc
 :skupper-east: skupper 2

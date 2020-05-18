@@ -1,1 +1,2 @@
-*  xref:index.adoc[ Home]
+* xref:index.adoc[Home]
+* xref:crc:index.adoc[CodeReady Containers]

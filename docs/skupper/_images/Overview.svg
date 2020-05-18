@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="396.875px" preserveAspectRatio="none" style="width:743px;height:396px;" version="1.1" viewBox="0 0 743 396" width="743.75px" zoomAndPan="magnify"><defs><filter height="300%" id="f1c7mwszxxw7n4" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="3.125"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="6.25" dy="6.25" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[37e42d1eeba74d86cec0559a120cc074]
-cluster Managed Integration--><rect fill="#FFFFFF" filter="url(#f1c7mwszxxw7n4)" height="342.1875" style="stroke: #000000; stroke-width: 1.5625;" width="328.125" x="34.375" y="37.5"/><text fill="#000000" font-family="sans-serif" font-size="18.75" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="239.0625" x="39.0625" y="58.0292">Managed Integration</text><!--MD5=[a49ae9119501a084afbf6a2789411428]
-cluster west--><rect fill="#FFFFFF" filter="url(#f1c7mwszxxw7n4)" height="242.1875" rx="19.5313" ry="19.5313" style="stroke: #000000; stroke-width: 1.5625; stroke-dasharray: 1.0,3.0;" width="253.125" x="71.875" y="100"/><text fill="#000000" font-family="sans-serif" font-size="18.75" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="129.6875" x="133.5938" y="120.5292">«namespace»</text><text fill="#000000" font-family="sans-serif" font-size="18.75" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="54.6875" x="76.5625" y="142.3553">west</text><!--MD5=[9c192fc4d20346febbdff4f6313fdb90]
-cluster CodeReady Containers--><rect fill="#FFFFFF" filter="url(#f1c7mwszxxw7n4)" height="342.1875" style="stroke: #000000; stroke-width: 1.5625;" width="326.5625" x="400" y="37.5"/><text fill="#000000" font-family="sans-serif" font-size="18.75" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="256.25" x="404.6875" y="58.0292">CodeReady Containers</text><!--MD5=[0124883ede9501bc1a470c8ae7e8c246]
-cluster crc--><rect fill="#FFFFFF" filter="url(#f1c7mwszxxw7n4)" height="242.1875" rx="19.5313" ry="19.5313" style="stroke: #000000; stroke-width: 1.5625; stroke-dasharray: 1.0,3.0;" width="251.5625" x="437.5" y="100"/><text fill="#000000" font-family="sans-serif" font-size="18.75" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="129.6875" x="498.4375" y="120.5292">«namespace»</text><text fill="#000000" font-family="sans-serif" font-size="18.75" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="35.9375" x="442.1875" y="142.3553">crc</text><ellipse cx="198.787" cy="292.1012" fill="#F8F8F8" filter="url(#f1c7mwszxxw7n4)" rx="101.912" ry="24.1324" style="stroke: #383838; stroke-width: 0.625;"/><text fill="#000000" font-family="sans-serif" font-size="18.75" lengthAdjust="spacingAndGlyphs" textLength="160.9375" x="118.3183" y="297.5455">Frontend service</text><ellipse cx="198.6461" cy="191.9959" fill="#F8F8F8" filter="url(#f1c7mwszxxw7n4)" rx="72.0836" ry="20.1209" style="stroke: #383838; stroke-width: 0.625;"/><text fill="#000000" font-family="sans-serif" font-size="18.75" lengthAdjust="spacingAndGlyphs" textLength="95.3125" x="150.9899" y="197.4403">skupper 1</text><ellipse cx="563.1228" cy="291.8433" fill="#F8F8F8" filter="url(#f1c7mwszxxw7n4)" rx="100.6228" ry="23.8746" style="stroke: #383838; stroke-width: 0.625;"/><text fill="#000000" font-family="sans-serif" font-size="18.75" lengthAdjust="spacingAndGlyphs" textLength="157.8125" x="484.2166" y="297.2876">Backend service</text><ellipse cx="563.0322" cy="191.9959" fill="#F8F8F8" filter="url(#f1c7mwszxxw7n4)" rx="73.1885" ry="20.1209" style="stroke: #383838; stroke-width: 0.625;"/><text fill="#000000" font-family="sans-serif" font-size="18.75" lengthAdjust="spacingAndGlyphs" textLength="96.875" x="514.5947" y="197.4403">skupper 2</text><!--MD5=[a7924effd695d0a8a018d8decb11362f]
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="396.875px" preserveAspectRatio="none" style="width:743px;height:396px;" version="1.1" viewBox="0 0 743 396" width="743.75px" zoomAndPan="magnify"><defs><filter height="300%" id="f5itzh8wiyp3c" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="3.125"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="6.25" dy="6.25" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[d4efdf53be7f2d130b5447f5618f2703]
+cluster West--><rect fill="#FFFFFF" filter="url(#f5itzh8wiyp3c)" height="342.1875" style="stroke: #000000; stroke-width: 1.5625;" width="328.125" x="34.375" y="37.5"/><text fill="#000000" font-family="sans-serif" font-size="18.75" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="57.8125" x="39.0625" y="58.0292">West</text><!--MD5=[a49ae9119501a084afbf6a2789411428]
+cluster west--><rect fill="#FFFFFF" filter="url(#f5itzh8wiyp3c)" height="242.1875" rx="19.5313" ry="19.5313" style="stroke: #000000; stroke-width: 1.5625; stroke-dasharray: 1.0,3.0;" width="253.125" x="71.875" y="100"/><text fill="#000000" font-family="sans-serif" font-size="18.75" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="129.6875" x="133.5938" y="120.5292">«namespace»</text><text fill="#000000" font-family="sans-serif" font-size="18.75" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="54.6875" x="76.5625" y="142.3553">west</text><!--MD5=[00d108b60b65e7c82ee8b358a4329fa8]
+cluster East--><rect fill="#FFFFFF" filter="url(#f5itzh8wiyp3c)" height="342.1875" style="stroke: #000000; stroke-width: 1.5625;" width="326.5625" x="400" y="37.5"/><text fill="#000000" font-family="sans-serif" font-size="18.75" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="50" x="404.6875" y="58.0292">East</text><!--MD5=[50bdae9e28c6667e9311c620a06d04af]
+cluster east--><rect fill="#FFFFFF" filter="url(#f5itzh8wiyp3c)" height="242.1875" rx="19.5313" ry="19.5313" style="stroke: #000000; stroke-width: 1.5625; stroke-dasharray: 1.0,3.0;" width="251.5625" x="437.5" y="100"/><text fill="#000000" font-family="sans-serif" font-size="18.75" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="129.6875" x="498.4375" y="120.5292">«namespace»</text><text fill="#000000" font-family="sans-serif" font-size="18.75" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="51.5625" x="442.1875" y="142.3553">east</text><ellipse cx="198.787" cy="292.1012" fill="#F8F8F8" filter="url(#f5itzh8wiyp3c)" rx="101.912" ry="24.1324" style="stroke: #383838; stroke-width: 0.625;"/><text fill="#000000" font-family="sans-serif" font-size="18.75" lengthAdjust="spacingAndGlyphs" textLength="160.9375" x="118.3183" y="297.5455">Frontend service</text><ellipse cx="198.6461" cy="191.9959" fill="#F8F8F8" filter="url(#f5itzh8wiyp3c)" rx="72.0836" ry="20.1209" style="stroke: #383838; stroke-width: 0.625;"/><text fill="#000000" font-family="sans-serif" font-size="18.75" lengthAdjust="spacingAndGlyphs" textLength="95.3125" x="150.9899" y="197.4403">skupper 1</text><ellipse cx="563.1228" cy="291.8433" fill="#F8F8F8" filter="url(#f5itzh8wiyp3c)" rx="100.6228" ry="23.8746" style="stroke: #383838; stroke-width: 0.625;"/><text fill="#000000" font-family="sans-serif" font-size="18.75" lengthAdjust="spacingAndGlyphs" textLength="157.8125" x="484.2166" y="297.2876">Backend service</text><ellipse cx="563.0322" cy="191.9959" fill="#F8F8F8" filter="url(#f5itzh8wiyp3c)" rx="73.1885" ry="20.1209" style="stroke: #383838; stroke-width: 0.625;"/><text fill="#000000" font-family="sans-serif" font-size="18.75" lengthAdjust="spacingAndGlyphs" textLength="96.875" x="514.5947" y="197.4403">skupper 2</text><!--MD5=[a7924effd695d0a8a018d8decb11362f]
 link Frontend service to skupper 1--><path d="M198.4375,267.9688 C198.4375,249.6155 198.4375,231.2625 198.4375,212.9094 " fill="none" id="Frontend service-skupper 1" style="stroke: #383838; stroke-width: 1.09375;"/><!--MD5=[8c81dcb5fb6c2dab32ecd104556ca76f]
 link skupper 1 to skupper 2--><path d="M270.6016,192.1875 C333.7203,192.1875 425.8125,192.1875 489.4375,192.1875 " fill="none" id="skupper 1-skupper 2" style="stroke: #383838; stroke-width: 1.09375;"/><!--MD5=[a4a2497c9a65f6689e7315670faa5bb2]
-link Backend service to skupper 2--><path d="M563.2813,267.9688 C563.2813,249.6155 563.2813,231.2625 563.2813,212.9094 " fill="none" id="Backend service-skupper 2" style="stroke: #383838; stroke-width: 1.09375;"/><!--MD5=[d78f7860bcd0d18098290a498c44e054]
+link Backend service to skupper 2--><path d="M563.2813,267.9688 C563.2813,249.6155 563.2813,231.2625 563.2813,212.9094 " fill="none" id="Backend service-skupper 2" style="stroke: #383838; stroke-width: 1.09375;"/><!--MD5=[01f999c0f65b184939a09601fe973a4e]
 @startuml
 left to right direction
 skinparam monochrome true
@@ -22,15 +22,15 @@ skinparam rectangle {
   roundCorner<<namespace>> 25
 }
 
-rectangle "Managed Integration" {
+rectangle "West" {
   rectangle "west" <<namespace>>  {
 
   (Frontend service)
   (skupper 1)
     }
 }
-rectangle "CodeReady Containers" {
-  rectangle "crc" <<namespace>>{
+rectangle "East" {
+  rectangle "east" <<namespace>>{
 
   (Backend service)
   (skupper 2)
@@ -59,15 +59,15 @@ skinparam rectangle {
   roundCorner<<namespace>> 25
 }
 
-rectangle "Managed Integration" {
+rectangle "West" {
   rectangle "west" <<namespace>>  {
 
   (Frontend service)
   (skupper 1)
     }
 }
-rectangle "CodeReady Containers" {
-  rectangle "crc" <<namespace>>{
+rectangle "East" {
+  rectangle "east" <<namespace>>{
 
   (Backend service)
   (skupper 2)

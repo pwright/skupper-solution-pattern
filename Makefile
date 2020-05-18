@@ -23,11 +23,8 @@ export PYTHONPATH := python
 
 .PHONY: render
 render: clean
-	python3 -m transom render --force --quiet input output
-	python3 -m transom render --force --quiet --site-url "" input docs
-	@echo "See the output at:"
-	@echo file:${CURDIR}/output/index.html
-
+    antora local-antora-playbook.yml
+	./asciidoc-coalescer.rb modules/crc.adoc walkthroughs/crc/walkthrough.adoc
 
 .PHONY: clean
 clean:
