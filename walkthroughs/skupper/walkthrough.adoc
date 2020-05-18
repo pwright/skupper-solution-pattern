@@ -47,7 +47,7 @@ deployment.
 :sectnums:
 
 [time=5]
-== Install the Skupper command-line tool in your environment
+== Installing the Skupper cli in your local environment
 
 The `skupper` command-line tool is the primary entrypoint for
 installing and configuring the Skupper infrastructure. 
@@ -165,13 +165,30 @@ configured.
 
 . In the terminal for the *{west-cluster}* cluster:
 +
+[subs="attributes+"]
+----
  $ skupper status
+----
++
+The following output is displayed:
++
+[subs="attributes+"]
+----
  skupper not enabled for {west-namespace}
-
+----
 . In the terminal for the *{east-cluster}* cluster:
 +
+[subs="attributes+"]
+----
  $ skupper status
+----
++
+The following output is displayed:
++
+[subs="attributes+"]
+----
  skupper not enabled for {east-namespace}
+----
 
 ****
 
@@ -180,7 +197,9 @@ Try the steps again. If it's still not working contact your administrator, or se
 
 
 [time=5]
-== Install the Skupper router and connect the namespaces
+== Installing the Skupper router and connecting the namespaces
+
+Running the `skupper init` command in east namespace installs the router.
 
 Connecting namespaces requires you use the following commands:
 
@@ -200,17 +219,27 @@ you trust have access to it.
 
 . In the terminal for the {west-cluster}:
 +
-[subs="attributes+"]
 ----
  $ skupper init
+----
++
+The following output is displayed:
++
+[subs="attributes+"]
+----
  Skupper is now installed in namespace '{west-namespace}'.  Use 'skupper status' to get more information.
 ----
 
 . In the terminal for the {east-cluster}:
 +
-[subs="attributes+"]
 ----
  $ skupper init --edge
+----
++
+The following output is displayed:
++
+[subs="attributes+"]
+----
  Skupper is now installed in namespace '{east-namespace}'.  Use 'skupper status' to get more information.
 ----
 
@@ -239,14 +268,30 @@ configured.
 
 . In the terminal for the *{west-cluster}* cluster:
 +
+----
  $ skupper status
+----
++
+The following output is displayed:
++
+[subs="attributes+"]
+----
  skupper enabled for {west-namespace}.  It is connected to 1 other site.
+----
 
 . In the terminal for the *{east-cluster}* cluster:
 +
+----
  $ skupper status
+----
++
+The following output is displayed:
++
+[subs="attributes+"]
+----
  skupper enabled for {east-namespace}. It is connected to 1 other site.
 
+----
 ****
 
 [type=verificationFail]
@@ -266,11 +311,11 @@ available on all the connected namespaces.
 
 === Deploy the frontend and backend services
 
-. Start the frontend in the {west-cluster}:
+. Start the frontend in the *{west-cluster}* cluster:
 +
  oc create deployment hello-world-frontend --image quay.io/skupper/hello-world-frontend
 
-. Start the backend in the {east-cluster}:
+. Start the backend in the *{east-cluster}* cluster:
 +
  oc create deployment hello-world-backend --image quay.io/skupper/hello-world-backend
 
