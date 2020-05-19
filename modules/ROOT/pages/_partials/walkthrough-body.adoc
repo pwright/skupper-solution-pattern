@@ -1,12 +1,3 @@
-:skupper-name: Skupper
-:skupper_cli_release: 0.2.0
-:west-cluster: Managed Integration
-:west-namespace: {project-namespace}
-:west-cli: oc
-:east-cluster: CodeReady Containers
-:east-namespace: crc
-:east-docs-link: https://code-ready.github.io/crc/
-:east-cli: oc
 
 = Communicating with another cluster using Skupper
 
@@ -17,7 +8,12 @@ This Solution Pattern uses an HTTP Hello World application with a frontend servi
 The frontend uses the backend to process requests.
 The frontend is deployed in the *{west-namespace}* namespace of the {west-cluster} cluster, and the backend is deployed in the *{east-namespace}* namespace of a {east-cluster} cluster.
 
-image::https://skupper.io/images/hello-world-entities.svg[]
+:overview-uml: overview
+
+[plantuml, Overview, svg,subs="attributes+"]
+....
+include::{overview-uml}.uml[]
+....
 
 While these instructions use this particular application for demonstration purposes, the steps are the same for any Skupper
 deployment.
@@ -56,11 +52,17 @@ installing and configuring the Skupper infrastructure.
 +
 For Linux or WSL on Windows, enter:
 +
- curl -fL https://github.com/skupperproject/skupper-cli/releases/download/{skupper_cli_release}/skupper-cli-{skupper_cli_release}-linux-amd64.tgz | tar -xzf -
+[subs="attributes+"]
+----
+curl -fL https://github.com/skupperproject/skupper-cli/releases/download/{skupper_cli_release}/skupper-cli-{skupper_cli_release}-linux-amd64.tgz | tar -xzf -
+----
 +
 For macOS, enter:
 +
- curl -fL https://github.com/skupperproject/skupper-cli/releases/download/{skupper_cli_release}/skupper-cli-{skupper_cli_release}-mac-amd64.tgz | tar -xzf -
+[subs="attributes+"]
+----
+curl -fL https://github.com/skupperproject/skupper-cli/releases/download/{skupper_cli_release}/skupper-cli-{skupper_cli_release}-mac-amd64.tgz | tar -xzf -
+----
 +
 This produces an executable file named `skupper` in your current
 directory.
@@ -72,9 +74,11 @@ page] for information on other platforms.
 +
 For example:
 +
- mkdir -p $HOME/bin
- export PATH=$PATH:$HOME/bin
- mv skupper $HOME/bin
+----
+mkdir -p $HOME/bin
+export PATH=$PATH:$HOME/bin
+mv skupper $HOME/bin
+----
 
 [type=verification]
 ****

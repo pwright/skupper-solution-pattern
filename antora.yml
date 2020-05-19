@@ -1,5 +1,5 @@
-name: mindmaps
-title: Mindmaps
+name: skupper
+title: Skupper Solution Pattern
 version: 'master'
 start_ROOT: ROOT:index.adoc
 nav:

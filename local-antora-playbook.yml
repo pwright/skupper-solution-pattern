@@ -1,26 +1,27 @@
 site:
-  title: Mindmaps Site
+  title: Skupper Solution Patterns Site
   # the 404 page and sitemap files only get generated when the url property is set
-  url: https://pwright.github.io/mindmaps
-  start_page: mindmaps::index.adoc
+  url: https://pwright.github.io/skupper-solution-pattern
+  start_page: skupper::index.adoc
 content:
   sources:
   - url: .
     branches: HEAD
-    start_path: antora
-
-
 
 ui:
   bundle:
     url: ./ui-bundle.zip
     snapshot: true
 
+output:
+  dir: ./docs
 
 asciidoc:
   attributes:
     plantuml-server-url: 'http://www.plantuml.com/plantuml'
     plantuml-fetch-diagram: true
+    openshift-host: 'https//www.openshift.com'
+    project-namespace: 'Name defined at runtime'
   extensions:
     - asciidoctor-plantuml
     - ./lib/tab-block.js

@@ -1,0 +1,16 @@
+:skupper-name: Skupper
+:skupper_cli_release: 0.2.0
+
+
+
+:west-cluster: West
+:west-namespace: west
+:west-cli: kubectl
+:skupper-west: skupper 1
+
+
+:east-cluster: East
+:east-namespace: east
+:east-docs-link: https://code-ready.github.io/crc/
+:east-cli: kubectl
+:skupper-east: skupper 2

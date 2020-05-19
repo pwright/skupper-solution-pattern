@@ -1,1 +1,3 @@
-*  xref:index.adoc[ Home]
+* xref:index.adoc[Home]
+* xref:crc:index.adoc[CodeReady Containers]
+* xref:crc:index.adoc[OpenShift Container Platform]

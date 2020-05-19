@@ -1,0 +1,3 @@
+include::_partials/attributes.adoc[]
+
+include::ROOT:partial$walkthrough-body.adoc[]

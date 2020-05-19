@@ -1,1 +1,5 @@
-= Walkthrough source
+//generic text - never gets published as walkthrough
+
+include::_partials/attributes.adoc[]
+
+include::_partials/walkthrough-body.adoc[]

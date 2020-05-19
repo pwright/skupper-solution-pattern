@@ -1,0 +1,3 @@
+include::ocp/pages/_partials/attributes.adoc[]
+
+include::ROOT/pages/_partials/walkthrough-body.adoc[]

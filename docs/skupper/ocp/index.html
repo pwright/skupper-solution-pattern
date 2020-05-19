@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Communicating with another cluster using Skupper :: Skupper Solution Patterns Site</title>
+    <link rel="canonical" href="https://pwright.github.io/skupper-solution-pattern/skupper/ocp/index.html">
+    <meta name="generator" content="Antora 2.3.1">
+    <link rel="stylesheet" href="../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://pwright.github.io/skupper-solution-pattern">Skupper Solution Patterns Site</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+         
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="skupper" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Skupper Solution Pattern</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../crc/index.html">CodeReady Containers</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../crc/index.html">OpenShift Container Platform</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Skupper Solution Pattern</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Skupper Solution Pattern</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Skupper Solution Pattern</a></li>
+    <li><a href="index.html">Communicating with another cluster using Skupper</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///home/pwright/repos/a/skupper-solution-pattern/modules/ocp/pages/index.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Communicating with another cluster using Skupper</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Securely enable communications across OpenShift clusters.</p>
+</div>
+<div class="paragraph">
+<p>This Solution Pattern uses an HTTP Hello World application with a frontend service and a backend service.
+The frontend uses the backend to process requests.
+The frontend is deployed in the <strong>Name defined at runtime</strong> namespace of the Managed Integration cluster, and the backend is deployed in the <strong>ocp</strong> namespace of a OpenShift Container Platform cluster.</p>
+</div>
+<div class="imageblock plantuml">
+<div class="content">
+<img src="_images/Overview.svg" alt="Overview">
+</div>
+</div>
+<div class="paragraph">
+<p>While these instructions use this particular application for demonstration purposes, the steps are the same for any Skupper
+deployment.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>You must have <code>oc</code> installed</p>
+</li>
+<li>
+<p>This Solution Pattern assumes you have <a href="https://docs.openshift.com/container-platform/4.4/welcome/index.html">OpenShift Container Platform</a> installed on your local machine, however, Skupper works with any flavor of Kubernetes.</p>
+</li>
+</ul>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Skupper</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://skupper.io">Skupper Website</a></p>
+</li>
+<li>
+<p><a href="https://github.com/skupperproject/skupper-example-hello-world">HTTP Hello World example code</a></p>
+</li>
+<li>
+<p><a href="https://github.com/skupperproject/skupper-example-tcp-echo">TCP-based service example code</a></p>
+</li>
+<li>
+<p><a href="https://skupper.io/examples/index.html">Explore the examples</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Red Hat OpenShift</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https//www.openshift.com/console" target="_blank" rel="noopener">Console</a></p>
+</li>
+<li>
+<p><a href="https://help.openshift.com/" target="_blank" rel="noopener">Openshift Online Help Center</a></p>
+</li>
+<li>
+<p><a href="https://blog.openshift.com/" target="_blank" rel="noopener">Openshift Blog</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installing_the_skupper_cli_in_your_local_environment"><a class="anchor" href="#_installing_the_skupper_cli_in_your_local_environment"></a>1. Installing the Skupper cli in your local environment</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>skupper</code> command-line tool is the primary entrypoint for
+installing and configuring the Skupper infrastructure.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Download the latest release of the Skupper command for your platform,</p>
+<div class="paragraph">
+<p>For Linux or WSL on Windows, enter:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>curl -fL https://github.com/skupperproject/skupper-cli/releases/download/0.2.0/skupper-cli-0.2.0-linux-amd64.tgz | tar -xzf -</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For macOS, enter:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>curl -fL https://github.com/skupperproject/skupper-cli/releases/download/0.2.0/skupper-cli-0.2.0-mac-amd64.tgz | tar -xzf -</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This produces an executable file named <code>skupper</code> in your current
+directory.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+See the <a href="https://github.com/skupperproject/skupper-cli/releases">Skupper CLI release
+page</a> for information on other platforms.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Add <code>skupper</code> to your path</p>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>mkdir -p $HOME/bin
+export PATH=$PATH:$HOME/bin
+mv skupper $HOME/bin</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>To test your installation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper --version</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Do you see the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>skupper version 0.2.0</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Try the steps again. If it&#8217;s still not working contact your administrator, or seek help at <a href="https://skupper.io" class="bare">https://skupper.io</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuring_access_to_multiple_namespaces"><a class="anchor" href="#_configuring_access_to_multiple_namespaces"></a>2. Configuring access to multiple namespaces</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Skupper is designed for use with multiple namespaces, typically on
+different clusters.  The <code>skupper</code> command uses your kubeconfig and
+current context to select the namespace where it operates.</p>
+</div>
+<div class="sect2">
+<h3 id="_configure_separate_terminal_sessions"><a class="anchor" href="#_configure_separate_terminal_sessions"></a>2.1. Configure separate terminal sessions</h3>
+<div class="paragraph">
+<p>Start a terminal session for each of your namespaces.  Set the
+<code>KUBECONFIG</code> environment variable to a different path in each session.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Start a terminal for the <strong>Managed Integration</strong> cluster:</p>
+<div class="literalblock">
+<div class="content">
+<pre>export KUBECONFIG=$HOME/.kube/config-west</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Start a terminal for the <strong>OpenShift Container Platform</strong> cluster:</p>
+<div class="literalblock">
+<div class="content">
+<pre>export KUBECONFIG=$HOME/.kube/config-east</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_log_in_to_your_clusters"><a class="anchor" href="#_log_in_to_your_clusters"></a>2.2. Log in to your clusters</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Log into the <strong>Managed Integration</strong> cluster.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Navigate to the <a href="https//www.openshift.com/console" target="_blank" rel="noopener">OpenShift Console</a></p>
+</li>
+<li>
+<p>Choose <strong>Copy Login Command</strong> from the menu displayed when you click on your username.</p>
+</li>
+<li>
+<p>Enter the command into the <strong>Managed Integration</strong> terminal session.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Log into the <strong>OpenShift Container Platform</strong> cluster.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Start OpenShift Container Platform:</p>
+<div class="literalblock">
+<div class="content">
+<pre>$ crc start</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Log into the OpenShift Container Platform cluster using the command displayed in the output, for example:</p>
+<div class="literalblock">
+<div class="content">
+<pre>$ oc login -u developer -p developer https://api.crc.testing:6443</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_set_the_current_namespaces"><a class="anchor" href="#_set_the_current_namespaces"></a>2.3. Set the current namespaces</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the terminal for the <strong>Managed Integration</strong> cluster:</p>
+<div class="listingblock">
+<div class="content">
+<pre>oc config set-context --current --namespace Name defined at runtime</pre>
+</div>
+</div>
+</li>
+<li>
+<p>In the terminal for the <strong>OpenShift Container Platform</strong> cluster:</p>
+<div class="listingblock">
+<div class="content">
+<pre>oc new-project ocp
+oc config set-context --current --namespace ocp</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Do the following commands display the expected output?</p>
+</div>
+<div class="paragraph">
+<p>Once you have logged in and set the current namespaces, use the
+<code>skupper status</code> command to check that each namespace is correctly
+configured.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the terminal for the <strong>Managed Integration</strong> cluster:</p>
+<div class="listingblock">
+<div class="content">
+<pre> $ skupper status</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following output is displayed:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre> skupper not enabled for Name defined at runtime</pre>
+</div>
+</div>
+</li>
+<li>
+<p>In the terminal for the <strong>OpenShift Container Platform</strong> cluster:</p>
+<div class="listingblock">
+<div class="content">
+<pre> $ skupper status</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following output is displayed:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre> skupper not enabled for ocp</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Try the steps again. If it&#8217;s still not working contact your administrator, or seek help at <a href="https://skupper.io" class="bare">https://skupper.io</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installing_the_skupper_router_and_connecting_the_namespaces"><a class="anchor" href="#_installing_the_skupper_router_and_connecting_the_namespaces"></a>3. Installing the Skupper router and connecting the namespaces</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Running the <code>skupper init</code> command in east namespace installs the router.</p>
+</div>
+<div class="paragraph">
+<p>Connecting namespaces requires you use the following commands:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>skupper connection-token</code> command generates a secret token that
+signifies permission to connect.  The token also carries the
+connection details.</p>
+</li>
+<li>
+<p>The <code>skupper connect</code> command then uses the
+connection token to establish a connection to the namespace that
+generated it.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Anyone who has the connection token can connect to your namespace.  Make sure that only those
+you trust have access to it.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_install_the_router_in_both_namespaces"><a class="anchor" href="#_install_the_router_in_both_namespaces"></a>3.1. Install the router in both namespaces</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the terminal for the Managed Integration:</p>
+<div class="listingblock">
+<div class="content">
+<pre> $ skupper init</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following output is displayed:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre> Skupper is now installed in namespace 'Name defined at runtime'.  Use 'skupper status' to get more information.</pre>
+</div>
+</div>
+</li>
+<li>
+<p>In the terminal for the OpenShift Container Platform:</p>
+<div class="listingblock">
+<div class="content">
+<pre> $ skupper init --edge</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following output is displayed:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre> Skupper is now installed in namespace 'ocp'.  Use 'skupper status' to get more information.</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Using the <code>--edge</code> argument in the ocp namespace disables network ingress at the
+Skupper router layer.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_connect_your_namespaces"><a class="anchor" href="#_connect_your_namespaces"></a>3.2. Connect your namespaces</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Generate a token in the <strong>Name defined at runtime</strong>:</p>
+<div class="literalblock">
+<div class="content">
+<pre>skupper connection-token $HOME/secret.yaml</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Use the token in the <strong>ocp</strong> to form a connection</p>
+<div class="literalblock">
+<div class="content">
+<pre>skupper connect $HOME/secret.yaml</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Do the following commands display the expected output?</p>
+</div>
+<div class="paragraph">
+<p>Use the
+<code>skupper status</code> command to check that each namespace is correctly
+configured.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the terminal for the <strong>Managed Integration</strong> cluster:</p>
+<div class="listingblock">
+<div class="content">
+<pre> $ skupper status</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following output is displayed:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre> skupper enabled for Name defined at runtime.  It is connected to 1 other site.</pre>
+</div>
+</div>
+</li>
+<li>
+<p>In the terminal for the <strong>OpenShift Container Platform</strong> cluster:</p>
+<div class="listingblock">
+<div class="content">
+<pre> $ skupper status</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following output is displayed:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre> skupper enabled for ocp. It is connected to 1 other site.</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Try the steps again. If it&#8217;s still not working contact your administrator, or seek help at <a href="https://skupper.io" class="bare">https://skupper.io</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exposing_the_services"><a class="anchor" href="#_exposing_the_services"></a>4. Exposing the services</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You now have a Skupper network capable of multi-cluster communication,
+but no services are attached to it.</p>
+</div>
+<div class="paragraph">
+<p>This task describes how to use  the <code>skupper
+expose</code> command to make a Kubernetes deployment on one namespace
+available on all the connected namespaces.</p>
+</div>
+<div class="sect2">
+<h3 id="_deploy_the_frontend_and_backend_services"><a class="anchor" href="#_deploy_the_frontend_and_backend_services"></a>4.1. Deploy the frontend and backend services</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Start the frontend in the <strong>Managed Integration</strong> cluster:</p>
+<div class="literalblock">
+<div class="content">
+<pre>oc create deployment hello-world-frontend --image quay.io/skupper/hello-world-frontend</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Start the backend in the <strong>OpenShift Container Platform</strong> cluster:</p>
+<div class="literalblock">
+<div class="content">
+<pre>oc create deployment hello-world-backend --image quay.io/skupper/hello-world-backend</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_expose_the_backend_service"><a class="anchor" href="#_expose_the_backend_service"></a>4.2. Expose the backend service</h3>
+<div class="paragraph">
+<p>At this point, we have the frontend and backend services running, but
+the frontend has no way to contact the backend.  The frontend and
+backend are in different namespaces and different clusters),
+and the backend has no public ingress.</p>
+</div>
+<div class="paragraph">
+<p>Use the <code>skupper expose</code> command in the OpenShift Container Platform to make <code>hello-world-backend</code>
+available in the Managed Integration.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the terminal for the OpenShift Container Platform:</p>
+<div class="literalblock">
+<div class="content">
+<pre>skupper expose deployment hello-world-backend --port 8080 --protocol http</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Check that the backend service is represented in the Managed Integration:</p>
+<div class="literalblock">
+<div class="content">
+<pre>oc get services</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output should be similar to the following:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ kubectl get services
+NAME                   TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)       AGE
+hello-world-backend    ClusterIP      10.96.175.18    &lt;none&gt;          8080/TCP      1m30s</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_create_a_route"><a class="anchor" href="#_create_a_route"></a>4.3. Create a route</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the Managed Integration, expose a route:</p>
+<div class="literalblock">
+<div class="content">
+<pre>oc expose deployment hello-world-frontend --port 8080 --type LoadBalancer</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Navigate to the <a href="https//www.openshift.com/console" target="_blank" rel="noopener">OpenShift Console</a></p>
+</li>
+<li>
+<p>Switch to the Name defined at runtime project.</p>
+</li>
+<li>
+<p>In the <strong>Overview</strong>, expand the <strong>hello-world-frontend</strong> application.</p>
+</li>
+<li>
+<p>Click <strong>Create Route</strong>. This creates a route and displays a URL.</p>
+</li>
+</ol>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Click the newly created URL.</p>
+</div>
+<div class="paragraph">
+<p>Is the output  similar to the following:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>I am the frontend.  The backend says 'Hello from hello-world-backend-6d58c544fc-dhzz2 (1)'.</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Try the steps again. If it&#8217;s still not working contact your administrator, or seek help at <a href="https://skupper.io" class="bare">https://skupper.io</a></p>
+</div>
+</div>
+</div>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
