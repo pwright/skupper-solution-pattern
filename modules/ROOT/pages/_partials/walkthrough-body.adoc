@@ -52,11 +52,17 @@ installing and configuring the Skupper infrastructure.
 +
 For Linux or WSL on Windows, enter:
 +
- curl -fL https://github.com/skupperproject/skupper-cli/releases/download/{skupper_cli_release}/skupper-cli-{skupper_cli_release}-linux-amd64.tgz | tar -xzf -
+[subs="attributes+"]
+----
+curl -fL https://github.com/skupperproject/skupper-cli/releases/download/{skupper_cli_release}/skupper-cli-{skupper_cli_release}-linux-amd64.tgz | tar -xzf -
+----
 +
 For macOS, enter:
 +
- curl -fL https://github.com/skupperproject/skupper-cli/releases/download/{skupper_cli_release}/skupper-cli-{skupper_cli_release}-mac-amd64.tgz | tar -xzf -
+[subs="attributes+"]
+----
+curl -fL https://github.com/skupperproject/skupper-cli/releases/download/{skupper_cli_release}/skupper-cli-{skupper_cli_release}-mac-amd64.tgz | tar -xzf -
+----
 +
 This produces an executable file named `skupper` in your current
 directory.
@@ -68,9 +74,11 @@ page] for information on other platforms.
 +
 For example:
 +
- mkdir -p $HOME/bin
- export PATH=$PATH:$HOME/bin
- mv skupper $HOME/bin
+----
+mkdir -p $HOME/bin
+export PATH=$PATH:$HOME/bin
+mv skupper $HOME/bin
+----
 
 [type=verification]
 ****
