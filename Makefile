@@ -26,10 +26,10 @@ render: clean
 		antora local-antora-playbook.yml
 		./asciidoc-coalescer.rb --attribute overview-uml=null modules/crc.adoc > walkthroughs/crc/walkthrough.adoc
 		cp docs/skupper/crc/_images/Overview.svg walkthroughs/crc/
-		sed -i '/.*plantuml.*/c\image::Overview.svg[]' walkthroughs/crc/walkthrough.adoc
 		./asciidoc-coalescer.rb --attribute overview-uml=null modules/ocp.adoc > walkthroughs/ocp/walkthrough.adoc
 		cp docs/skupper/ocp/_images/Overview.svg walkthroughs/ocp/
-		sed -i '/.*plantuml.*/c\image::Overview.svg[]' walkthroughs/ocp/walkthrough.adoc
+		sed -i '/.*plantuml.*/c\image::Overview.svg[]' walkthroughs/*/walkthrough.adoc
+		sed -i 's/\.\.\.\.//' walkthroughs/*/walkthrough.adoc
 
 .PHONY: clean
 clean:

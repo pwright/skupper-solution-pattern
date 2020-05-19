@@ -100,7 +100,7 @@
 <div class="paragraph">
 <p>This Solution Pattern uses an HTTP Hello World application with a frontend service and a backend service.
 The frontend uses the backend to process requests.
-The frontend is deployed in the <strong>Name defined at runtime</strong> namespace of the Managed Integration cluster, and the backend is deployed in the <strong>crc</strong> namespace of a OpenShift Container Platform cluster.</p>
+The frontend is deployed in the <strong>Name defined at runtime</strong> namespace of the Managed Integration cluster, and the backend is deployed in the <strong>ocp</strong> namespace of a OpenShift Container Platform cluster.</p>
 </div>
 <div class="imageblock plantuml">
 <div class="content">
@@ -345,8 +345,8 @@ current context to select the namespace where it operates.</p>
 <p>In the terminal for the <strong>OpenShift Container Platform</strong> cluster:</p>
 <div class="listingblock">
 <div class="content">
-<pre>oc new-project crc
-oc config set-context --current --namespace crc</pre>
+<pre>oc new-project ocp
+oc config set-context --current --namespace ocp</pre>
 </div>
 </div>
 </li>
@@ -392,7 +392,7 @@ configured.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre> skupper not enabled for crc</pre>
+<pre> skupper not enabled for ocp</pre>
 </div>
 </div>
 </li>
@@ -474,7 +474,7 @@ you trust have access to it.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre> Skupper is now installed in namespace 'crc'.  Use 'skupper status' to get more information.</pre>
+<pre> Skupper is now installed in namespace 'ocp'.  Use 'skupper status' to get more information.</pre>
 </div>
 </div>
 </li>
@@ -487,7 +487,7 @@ you trust have access to it.
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Using the <code>--edge</code> argument in the crc namespace disables network ingress at the
+Using the <code>--edge</code> argument in the ocp namespace disables network ingress at the
 Skupper router layer.
 </td>
 </tr>
@@ -507,7 +507,7 @@ Skupper router layer.
 </div>
 </li>
 <li>
-<p>Use the token in the <strong>crc</strong> to form a connection</p>
+<p>Use the token in the <strong>ocp</strong> to form a connection</p>
 <div class="literalblock">
 <div class="content">
 <pre>skupper connect $HOME/secret.yaml</pre>
@@ -556,7 +556,7 @@ configured.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre> skupper enabled for crc. It is connected to 1 other site.</pre>
+<pre> skupper enabled for ocp. It is connected to 1 other site.</pre>
 </div>
 </div>
 </li>

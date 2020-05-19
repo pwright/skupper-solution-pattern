@@ -10,7 +10,7 @@
 
 
 :east-cluster: OpenShift Container Platform
-:east-namespace: crc
+:east-namespace: ocp
 :east-docs-link: https://docs.openshift.com/container-platform/4.4/welcome/index.html
 :east-cli: oc
 :skupper-east: skupper 2

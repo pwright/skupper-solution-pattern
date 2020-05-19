@@ -28,8 +28,8 @@ The frontend is deployed in the *{west-namespace}* namespace of the {west-cluste
 :overview-uml: overview
 
 image::Overview.svg[]
-....
-....
+
+
 
 While these instructions use this particular application for demonstration purposes, the steps are the same for any Skupper
 deployment.
