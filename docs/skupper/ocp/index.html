@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Communicating with another cluster using Skupper :: Skupper Solution Patterns Site</title>
-    <link rel="canonical" href="https://pwright.github.io/skupper-solution-pattern/skupper/crc/index.html">
+    <link rel="canonical" href="https://pwright.github.io/skupper-solution-pattern/skupper/ocp/index.html">
     <meta name="generator" content="Antora 2.3.1">
     <link rel="stylesheet" href="../../_/css/site.css">
   </head>
@@ -47,11 +47,11 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../index.html">Home</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
-    <a class="nav-link" href="index.html">CodeReady Containers</a>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../crc/index.html">CodeReady Containers</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
-    <a class="nav-link" href="index.html">OpenShift Container Platform</a>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../crc/index.html">OpenShift Container Platform</a>
   </li>
 </ul>
   </li>
@@ -84,10 +84,10 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Skupper Solution Pattern</a></li>
-    <li><a href="index.html">CodeReady Containers</a></li>
+    <li><a href="index.html">Communicating with another cluster using Skupper</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="file:///home/pwright/repos/a/skupper-solution-pattern/modules/crc/pages/index.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="file:///home/pwright/repos/a/skupper-solution-pattern/modules/ocp/pages/index.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <article class="doc">
@@ -100,7 +100,7 @@
 <div class="paragraph">
 <p>This Solution Pattern uses an HTTP Hello World application with a frontend service and a backend service.
 The frontend uses the backend to process requests.
-The frontend is deployed in the <strong>Name defined at runtime</strong> namespace of the Managed Integration cluster, and the backend is deployed in the <strong>crc</strong> namespace of a CodeReady Containers cluster.</p>
+The frontend is deployed in the <strong>Name defined at runtime</strong> namespace of the Managed Integration cluster, and the backend is deployed in the <strong>crc</strong> namespace of a OpenShift Container Platform cluster.</p>
 </div>
 <div class="imageblock plantuml">
 <div class="content">
@@ -118,7 +118,7 @@ deployment.</p>
 <p>You must have <code>oc</code> installed</p>
 </li>
 <li>
-<p>This Solution Pattern assumes you have <a href="https://code-ready.github.io/crc/">CodeReady Containers</a> installed on your local machine, however, Skupper works with any flavor of Kubernetes.</p>
+<p>This Solution Pattern assumes you have <a href="https://docs.openshift.com/container-platform/4.4/welcome/index.html">OpenShift Container Platform</a> installed on your local machine, however, Skupper works with any flavor of Kubernetes.</p>
 </li>
 </ul>
 </div>
@@ -273,7 +273,7 @@ current context to select the namespace where it operates.</p>
 </div>
 </li>
 <li>
-<p>Start a terminal for the <strong>CodeReady Containers</strong> cluster:</p>
+<p>Start a terminal for the <strong>OpenShift Container Platform</strong> cluster:</p>
 <div class="literalblock">
 <div class="content">
 <pre>export KUBECONFIG=$HOME/.kube/config-east</pre>
@@ -304,11 +304,11 @@ current context to select the namespace where it operates.</p>
 </div>
 </li>
 <li>
-<p>Log into the <strong>CodeReady Containers</strong> cluster.</p>
+<p>Log into the <strong>OpenShift Container Platform</strong> cluster.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Start CodeReady Containers:</p>
+<p>Start OpenShift Container Platform:</p>
 <div class="literalblock">
 <div class="content">
 <pre>$ crc start</pre>
@@ -316,7 +316,7 @@ current context to select the namespace where it operates.</p>
 </div>
 </li>
 <li>
-<p>Log into the CodeReady Containers cluster using the command displayed in the output, for example:</p>
+<p>Log into the OpenShift Container Platform cluster using the command displayed in the output, for example:</p>
 <div class="literalblock">
 <div class="content">
 <pre>$ oc login -u developer -p developer https://api.crc.testing:6443</pre>
@@ -342,7 +342,7 @@ current context to select the namespace where it operates.</p>
 </div>
 </li>
 <li>
-<p>In the terminal for the <strong>CodeReady Containers</strong> cluster:</p>
+<p>In the terminal for the <strong>OpenShift Container Platform</strong> cluster:</p>
 <div class="listingblock">
 <div class="content">
 <pre>oc new-project crc
@@ -381,7 +381,7 @@ configured.</p>
 </div>
 </li>
 <li>
-<p>In the terminal for the <strong>CodeReady Containers</strong> cluster:</p>
+<p>In the terminal for the <strong>OpenShift Container Platform</strong> cluster:</p>
 <div class="listingblock">
 <div class="content">
 <pre> $ skupper status</pre>
@@ -463,7 +463,7 @@ you trust have access to it.
 </div>
 </li>
 <li>
-<p>In the terminal for the CodeReady Containers:</p>
+<p>In the terminal for the OpenShift Container Platform:</p>
 <div class="listingblock">
 <div class="content">
 <pre> $ skupper init --edge</pre>
@@ -545,7 +545,7 @@ configured.</p>
 </div>
 </li>
 <li>
-<p>In the terminal for the <strong>CodeReady Containers</strong> cluster:</p>
+<p>In the terminal for the <strong>OpenShift Container Platform</strong> cluster:</p>
 <div class="listingblock">
 <div class="content">
 <pre> $ skupper status</pre>
@@ -595,7 +595,7 @@ available on all the connected namespaces.</p>
 </div>
 </li>
 <li>
-<p>Start the backend in the <strong>CodeReady Containers</strong> cluster:</p>
+<p>Start the backend in the <strong>OpenShift Container Platform</strong> cluster:</p>
 <div class="literalblock">
 <div class="content">
 <pre>oc create deployment hello-world-backend --image quay.io/skupper/hello-world-backend</pre>
@@ -614,13 +614,13 @@ backend are in different namespaces and different clusters),
 and the backend has no public ingress.</p>
 </div>
 <div class="paragraph">
-<p>Use the <code>skupper expose</code> command in the CodeReady Containers to make <code>hello-world-backend</code>
+<p>Use the <code>skupper expose</code> command in the OpenShift Container Platform to make <code>hello-world-backend</code>
 available in the Managed Integration.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>In the terminal for the CodeReady Containers:</p>
+<p>In the terminal for the OpenShift Container Platform:</p>
 <div class="literalblock">
 <div class="content">
 <pre>skupper expose deployment hello-world-backend --port 8080 --protocol http</pre>
