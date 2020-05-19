@@ -97,7 +97,7 @@
 <div class="paragraph">
 <p>This Solution Pattern uses an HTTP Hello World application with a frontend service and a backend service.
 The frontend uses the backend to process requests.
-The frontend is deployed in the <strong>west</strong> namespace of the Managed Integration cluster, and the backend is deployed in the <strong>crc</strong> namespace of a CodeReady Containers cluster.</p>
+The frontend is deployed in the <strong>Name defined at runtime</strong> namespace of the Managed Integration cluster, and the backend is deployed in the <strong>crc</strong> namespace of a CodeReady Containers cluster.</p>
 </div>
 <div class="imageblock plantuml">
 <div class="content">
@@ -334,7 +334,7 @@ current context to select the namespace where it operates.</p>
 <p>In the terminal for the <strong>Managed Integration</strong> cluster:</p>
 <div class="listingblock">
 <div class="content">
-<pre>oc config set-context --current --namespace west</pre>
+<pre>oc config set-context --current --namespace Name defined at runtime</pre>
 </div>
 </div>
 </li>
@@ -373,7 +373,7 @@ configured.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre> skupper not enabled for west</pre>
+<pre> skupper not enabled for Name defined at runtime</pre>
 </div>
 </div>
 </li>
@@ -455,7 +455,7 @@ you trust have access to it.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre> Skupper is now installed in namespace 'west'.  Use 'skupper status' to get more information.</pre>
+<pre> Skupper is now installed in namespace 'Name defined at runtime'.  Use 'skupper status' to get more information.</pre>
 </div>
 </div>
 </li>
@@ -496,7 +496,7 @@ Skupper router layer.
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Generate a token in the <strong>west</strong>:</p>
+<p>Generate a token in the <strong>Name defined at runtime</strong>:</p>
 <div class="literalblock">
 <div class="content">
 <pre>skupper connection-token $HOME/secret.yaml</pre>
@@ -537,7 +537,7 @@ configured.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre> skupper enabled for west.  It is connected to 1 other site.</pre>
+<pre> skupper enabled for Name defined at runtime.  It is connected to 1 other site.</pre>
 </div>
 </div>
 </li>
@@ -661,7 +661,7 @@ hello-world-backend    ClusterIP      10.96.175.18    &lt;none&gt;          8080
 <p>Navigate to the <a href="https//www.openshift.com/console" target="_blank" rel="noopener">OpenShift Console</a></p>
 </li>
 <li>
-<p>Switch to the west project.</p>
+<p>Switch to the Name defined at runtime project.</p>
 </li>
 <li>
 <p>In the <strong>Overview</strong>, expand the <strong>hello-world-frontend</strong> application.</p>

@@ -26,7 +26,7 @@ render: clean
 		antora local-antora-playbook.yml
 		./asciidoc-coalescer.rb --attribute overview-uml=null modules/crc.adoc > walkthroughs/crc/walkthrough.adoc
 		cp docs/skupper/crc/_images/Overview.svg walkthroughs/crc/
-		# sed -i '/.*plantuml.*/c\image::Overview.svg[]' walkthroughs/crc/walkthrough.adoc
+		sed -i '/.*plantuml.*/c\image::Overview.svg[]' walkthroughs/crc/walkthrough.adoc
 
 .PHONY: clean
 clean:

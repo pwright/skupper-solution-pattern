@@ -21,7 +21,7 @@ asciidoc:
     plantuml-server-url: 'http://www.plantuml.com/plantuml'
     plantuml-fetch-diagram: true
     openshift-host: 'https//www.openshift.com'
-    project-namespace: 'west'
+    project-namespace: 'Name defined at runtime'
   extensions:
     - asciidoctor-plantuml
     - ./lib/tab-block.js
