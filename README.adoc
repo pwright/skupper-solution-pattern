@@ -2,4 +2,9 @@
 
 Based on https://skupper.io/start/index.html
 
+The goal of this repo is to:
+
+* produce walkthroughs for Integreatly
+* publish those walkthroughs as html
+* single source text for various scenarios
 
