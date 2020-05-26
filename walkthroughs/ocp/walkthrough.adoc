@@ -1,6 +1,8 @@
+:cluster-type: OpenShift Container Platform
+:solution-pattern-title: Communicating with an {cluster-type} cluster using Skupper
 :skupper-name: Skupper
 :skupper_cli_release: 0.2.0
-
+:ocp: true
 
 
 :west-cluster: Managed Integration
@@ -9,14 +11,14 @@
 :skupper-west: skupper 1
 
 
-:east-cluster: OpenShift Container Platform
+:east-cluster: {cluster-type}
 :east-namespace: ocp
 :east-docs-link: https://docs.openshift.com/container-platform/4.4/welcome/index.html
 :east-cli: oc
 :skupper-east: skupper 2
 
 
-= Communicating with another cluster using Skupper
+= {solution-pattern-title}
 
 Securely enable communications across OpenShift clusters.
 
@@ -38,7 +40,6 @@ deployment.
 
 * You must have `oc` installed
 
-* This Solution Pattern assumes you have link:{east-docs-link}[{east-cluster}] installed on your local machine, however, Skupper works with any flavor of Kubernetes.
 
 [type=walkthroughResource]
 .Skupper
@@ -149,9 +150,10 @@ Start a terminal session for each of your namespaces.  Set the
 
 . Log into the *{east-cluster}* cluster.
 
-.. Start {east-cluster}:
 
- $ crc start
+
+
+
 
 .. Log into the {east-cluster} cluster using the command displayed in the output, for example:
 

@@ -1,6 +1,8 @@
+:cluster-type: OpenShift Container Platform
+:solution-pattern-title: Communicating with an {cluster-type} cluster using Skupper
 :skupper-name: Skupper
 :skupper_cli_release: 0.2.0
-
+:ocp: true
 
 
 :west-cluster: Managed Integration
@@ -9,7 +11,7 @@
 :skupper-west: skupper 1
 
 
-:east-cluster: OpenShift Container Platform
+:east-cluster: {cluster-type}
 :east-namespace: ocp
 :east-docs-link: https://docs.openshift.com/container-platform/4.4/welcome/index.html
 :east-cli: oc

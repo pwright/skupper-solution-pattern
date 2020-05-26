@@ -1,5 +1,5 @@
 
-= Communicating with another cluster using Skupper
+= {solution-pattern-title}
 
 Securely enable communications across OpenShift clusters.
 
@@ -22,7 +22,9 @@ deployment.
 
 * You must have `oc` installed
 
+ifdef::crc[]
 * This Solution Pattern assumes you have link:{east-docs-link}[{east-cluster}] installed on your local machine, however, Skupper works with any flavor of Kubernetes.  
+endif::crc[]
 
 [type=walkthroughResource]
 .Skupper
@@ -133,9 +135,14 @@ Start a terminal session for each of your namespaces.  Set the
 
 . Log into the *{east-cluster}* cluster.
 
+ifdef::crc[]
+
 .. Start {east-cluster}:
 
  $ crc start
+
+endif::crc[]
+
 
 .. Log into the {east-cluster} cluster using the command displayed in the output, for example:
 
