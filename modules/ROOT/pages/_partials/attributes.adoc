@@ -1,5 +1,6 @@
 :skupper-name: Skupper
 :skupper_cli_release: 0.2.0
+:solution-pattern-title: Enabling cross cluster communication using Skupper
 
 
 
