@@ -5,7 +5,7 @@ cluster CodeReady Containers--><rect fill="#FFFFFF" filter="url(#f7vxoe90zel0g)"
 cluster crc--><rect fill="#FFFFFF" filter="url(#f7vxoe90zel0g)" height="242.1875" rx="19.5313" ry="19.5313" style="stroke: #000000; stroke-width: 1.5625; stroke-dasharray: 1.0,3.0;" width="251.5625" x="479.6875" y="100"/><text fill="#000000" font-family="sans-serif" font-size="18.75" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="129.6875" x="540.625" y="120.5292">«namespace»</text><text fill="#000000" font-family="sans-serif" font-size="18.75" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="35.9375" x="484.375" y="142.3553">crc</text><ellipse cx="212.8495" cy="292.1012" fill="#F8F8F8" filter="url(#f7vxoe90zel0g)" rx="101.912" ry="24.1324" style="stroke: #383838; stroke-width: 0.625;"/><text fill="#000000" font-family="sans-serif" font-size="18.75" lengthAdjust="spacingAndGlyphs" textLength="160.9375" x="132.3808" y="297.5455">Frontend service</text><ellipse cx="212.7086" cy="191.9959" fill="#F8F8F8" filter="url(#f7vxoe90zel0g)" rx="72.0836" ry="20.1209" style="stroke: #383838; stroke-width: 0.625;"/><text fill="#000000" font-family="sans-serif" font-size="18.75" lengthAdjust="spacingAndGlyphs" textLength="95.3125" x="165.0524" y="197.4403">skupper 1</text><ellipse cx="605.3103" cy="291.8433" fill="#F8F8F8" filter="url(#f7vxoe90zel0g)" rx="100.6228" ry="23.8746" style="stroke: #383838; stroke-width: 0.625;"/><text fill="#000000" font-family="sans-serif" font-size="18.75" lengthAdjust="spacingAndGlyphs" textLength="157.8125" x="526.4041" y="297.2876">Backend service</text><ellipse cx="605.2197" cy="191.9959" fill="#F8F8F8" filter="url(#f7vxoe90zel0g)" rx="73.1885" ry="20.1209" style="stroke: #383838; stroke-width: 0.625;"/><text fill="#000000" font-family="sans-serif" font-size="18.75" lengthAdjust="spacingAndGlyphs" textLength="96.875" x="556.7822" y="197.4403">skupper 2</text><!--MD5=[a7924effd695d0a8a018d8decb11362f]
 link Frontend service to skupper 1--><path d="M212.5,267.9688 C212.5,249.6155 212.5,231.2625 212.5,212.9094 " fill="none" id="Frontend service-skupper 1" style="stroke: #383838; stroke-width: 1.09375;"/><!--MD5=[8c81dcb5fb6c2dab32ecd104556ca76f]
 link skupper 1 to skupper 2--><path d="M284.6609,192.1875 C354.6547,192.1875 461.3562,192.1875 531.8547,192.1875 " fill="none" id="skupper 1-skupper 2" style="stroke: #383838; stroke-width: 1.09375;"/><!--MD5=[a4a2497c9a65f6689e7315670faa5bb2]
-link Backend service to skupper 2--><path d="M605.4688,267.9688 C605.4688,249.6155 605.4688,231.2625 605.4688,212.9094 " fill="none" id="Backend service-skupper 2" style="stroke: #383838; stroke-width: 1.09375;"/><!--MD5=[4df71039d2e52fe62b0629581c922407]
+link Backend service to skupper 2--><path d="M605.4688,267.9688 C605.4688,249.6155 605.4688,231.2625 605.4688,212.9094 " fill="none" id="Backend service-skupper 2" style="stroke: #383838; stroke-width: 1.09375;"/><!--MD5=[20b4fa61e360e850513f7775da0c2690]
 @startuml
 left to right direction
 skinparam monochrome true
@@ -79,11 +79,10 @@ rectangle "CodeReady Containers" {
 (Backend service) - (skupper 2)
 @enduml
 
-PlantUML version 1.2020.10(Sun May 17 09:35:57 UTC 2020)
+PlantUML version 1.2020.10(Sun May 17 09:48:49 UTC 2020)
 (GPL source distribution)
 Java Runtime: Java(TM) SE Runtime Environment
 JVM: Java HotSpot(TM) 64-Bit Server VM
-Java Version: 14.0.1+7
 Operating System: Linux
 Default Encoding: UTF-8
 Language: en

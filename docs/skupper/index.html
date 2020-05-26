@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Communicating with another cluster using Skupper :: Skupper Solution Patterns Site</title>
+    <title>{solution-pattern-title} :: Skupper Solution Patterns Site</title>
     <link rel="canonical" href="https://pwright.github.io/skupper-solution-pattern/skupper/index.html">
     <meta name="generator" content="Antora 2.3.1">
     <link rel="stylesheet" href="../_/css/site.css">
@@ -27,7 +27,7 @@
         </div>
         <div class="navbar-item">
           <span class="control">
-            <a class="button is-primary" href="#">Download</a>
+            <a class="button is-primary" href="https://skupper.io">Download</a>
           </span>
         </div>
       </div>
@@ -51,7 +51,7 @@
     <a class="nav-link" href="crc/index.html">CodeReady Containers</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="crc/index.html">OpenShift Container Platform</a>
+    <a class="nav-link" href="ocp/index.html">OpenShift Container Platform</a>
   </li>
 </ul>
   </li>
@@ -91,7 +91,7 @@
 </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Communicating with another cluster using Skupper</h1>
+<h1 class="page">{solution-pattern-title}</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
@@ -116,9 +116,6 @@ deployment.</p>
 <ul>
 <li>
 <p>You must have <code>oc</code> installed</p>
-</li>
-<li>
-<p>This Solution Pattern assumes you have <a href="https://code-ready.github.io/crc/">East</a> installed on your local machine, however, Skupper works with any flavor of Kubernetes.</p>
 </li>
 </ul>
 </div>
@@ -307,14 +304,6 @@ current context to select the namespace where it operates.</p>
 <p>Log into the <strong>East</strong> cluster.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
-<li>
-<p>Start East:</p>
-<div class="literalblock">
-<div class="content">
-<pre>$ crc start</pre>
-</div>
-</div>
-</li>
 <li>
 <p>Log into the East cluster using the command displayed in the output, for example:</p>
 <div class="literalblock">

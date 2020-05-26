@@ -1,6 +1,8 @@
+:cluster-type: CodeReady Containers
+:solution-pattern-title: Communicating with a {cluster-type} cluster using Skupper
 :skupper-name: Skupper
 :skupper_cli_release: 0.2.0
-
+:crc: true
 
 
 :west-cluster: Managed Integration
@@ -9,7 +11,7 @@
 :skupper-west: skupper 1
 
 
-:east-cluster: CodeReady Containers
+:east-cluster: {cluster-type}
 :east-namespace: crc
 :east-docs-link: https://code-ready.github.io/crc/
 :east-cli: oc
