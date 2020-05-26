@@ -13,7 +13,4 @@ Notes:
 
 Based on https://skupper.io/start/index.html 
 
-Currently https://github.com/pwright/skupper-solution-pattern/blob/master/walkthroughs/ocp/walkthrough.adoc is broken
-
-
 
