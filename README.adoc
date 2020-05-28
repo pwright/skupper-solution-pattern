@@ -13,4 +13,18 @@ Notes:
 
 Based on https://skupper.io/start/index.html 
 
+To edit these walkthroughs, only edit the file `modules/ROOT/pages/_partials/walkthrough-body.adoc`.
+
+To rebuild the website and walkthroughs, you require ruby asciidoctor and antora/node:
+
+. Install plantuml:
++
+ npm install
+
+. Run the following command:
++
+ make render
+
+. Commit and push changes.
+
 
